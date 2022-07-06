@@ -187,7 +187,7 @@ if "%GITHUB_WORKFLOW%" neq "" (
   mkdir archive-llvmpipe
   pushd archive-llvmpipe
   copy /y ..\mesa-llvmpipe\bin\opengl32.dll .
-  %SZIP% a -mx=9 ..\mesa-llvmpipe-%MESA_VERSION%.zip 
+  %SZIP% a -mx=9 ..\mesa-llvmpipe.zip 
   popd
 
   mkdir archive-osmesa
@@ -195,7 +195,7 @@ if "%GITHUB_WORKFLOW%" neq "" (
   copy /y ..\mesa-llvmpipe\bin\osmesa.dll      .
   copy /y ..\mesa-llvmpipe\lib\osmesa.lib      .
   copy /y ..\mesa-llvmpipe\include\GL\osmesa.h .
-  %SZIP% a -mx=9 ..\mesa-osmesa-%MESA_VERSION%.zip 
+  %SZIP% a -mx=9 ..\mesa-osmesa.zip 
   popd
 
   mkdir archive-d3d12
@@ -206,7 +206,7 @@ if "%GITHUB_WORKFLOW%" neq "" (
   ) else if exist "%WindowsSdkVerBinPath%x64\dxil.dll" (
     copy /y "%WindowsSdkVerBinPath%x64\dxil.dll" .
   )
-  %SZIP% a -mx=9 ..\mesa-d3d12-%MESA_VERSION%.zip 
+  %SZIP% a -mx=9 ..\mesa-d3d12.zip 
   popd
 
   echo ::set-output name=LLVM_VERSION::%LLVM_VERSION%
