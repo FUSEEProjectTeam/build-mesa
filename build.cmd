@@ -1,8 +1,8 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set LLVM_VERSION=14.0.3
-set MESA_VERSION=22.1.0
+set LLVM_VERSION=14.0.6
+set MESA_VERSION=22.1.3
 
 set PATH=%CD%\llvm\bin;%CD%\winflexbison;%PATH%
 
@@ -60,7 +60,7 @@ where /q cmake.exe || (
 )
 
 where /q ninja.exe || (
-  curl -Lsf -o ninja-win.zip https://github.com/ninja-build/ninja/releases/download/v1.10.2/ninja-win.zip || exit /b 1
+  curl -Lsf -o ninja-win.zip https://github.com/ninja-build/ninja/releases/download/v1.11.0/ninja-win.zip || exit /b 1
   %SZIP% x -bb0 -y ninja-win.zip 1>nul 2>nul || exit /b 1
   del ninja-win.zip 1>nul 2>nul
 )
