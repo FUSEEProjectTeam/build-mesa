@@ -165,20 +165,20 @@ ninja -C mesa.build install || exit /b 1
 
 rem *** mesa d3d12 ***
 
-rd /s /q mesa.build 1>nul 2>nul
-meson setup ^
-  mesa.build ^
-  mesa.src ^
-  --prefix="%CD%\mesa-d3d12" ^
-  --default-library=static ^
-  -Dbuildtype=release ^
-  -Db_ndebug=true ^
-  -Db_vscrt=mt ^
-  -Dllvm=disabled ^
-  -Dplatforms=windows ^
-  -Dosmesa=false ^
-  -Dgallium-drivers=d3d12 || exit /b 1
-ninja -C mesa.build install || exit /b 1
+@REM rd /s /q mesa.build 1>nul 2>nul
+@REM meson setup ^
+@REM   mesa.build ^
+@REM   mesa.src ^
+@REM   --prefix="%CD%\mesa-d3d12" ^
+@REM   --default-library=static ^
+@REM   -Dbuildtype=release ^
+@REM   -Db_ndebug=true ^
+@REM   -Db_vscrt=mt ^
+@REM   -Dllvm=disabled ^
+@REM   -Dplatforms=windows ^
+@REM   -Dosmesa=false ^
+@REM   -Dgallium-drivers=d3d12 || exit /b 1
+@REM ninja -C mesa.build install || exit /b 1
 
 rem *** done ***
 rem output is in mesa-d3d12 and mesa-llvmpipe folders
@@ -190,24 +190,24 @@ if "%GITHUB_WORKFLOW%" neq "" (
   %SZIP% a -mx=9 ..\mesa-llvmpipe.zip 
   popd
 
-  mkdir archive-osmesa
-  pushd archive-osmesa
-  copy /y ..\mesa-llvmpipe\bin\osmesa.dll      .
-  copy /y ..\mesa-llvmpipe\lib\osmesa.lib      .
-  copy /y ..\mesa-llvmpipe\include\GL\osmesa.h .
-  %SZIP% a -mx=9 ..\mesa-osmesa.zip 
-  popd
+  @REM mkdir archive-osmesa
+  @REM pushd archive-osmesa
+  @REM copy /y ..\mesa-llvmpipe\bin\osmesa.dll      .
+  @REM copy /y ..\mesa-llvmpipe\lib\osmesa.lib      .
+  @REM copy /y ..\mesa-llvmpipe\include\GL\osmesa.h .
+  @REM %SZIP% a -mx=9 ..\mesa-osmesa.zip 
+  @REM popd
 
-  mkdir archive-d3d12
-  pushd archive-d3d12
-  copy /y ..\mesa-d3d12\bin\opengl32.dll .
-  if exist "%ProgramFiles(x86)%\Windows Kits\10\Redist\D3D\x64\dxil.dll" (
-    copy /y "%ProgramFiles(x86)%\Windows Kits\10\Redist\D3D\x64\dxil.dll" .
-  ) else if exist "%WindowsSdkVerBinPath%x64\dxil.dll" (
-    copy /y "%WindowsSdkVerBinPath%x64\dxil.dll" .
-  )
-  %SZIP% a -mx=9 ..\mesa-d3d12.zip 
-  popd
+  @REM mkdir archive-d3d12
+  @REM pushd archive-d3d12
+  @REM copy /y ..\mesa-d3d12\bin\opengl32.dll .
+  @REM if exist "%ProgramFiles(x86)%\Windows Kits\10\Redist\D3D\x64\dxil.dll" (
+  @REM   copy /y "%ProgramFiles(x86)%\Windows Kits\10\Redist\D3D\x64\dxil.dll" .
+  @REM ) else if exist "%WindowsSdkVerBinPath%x64\dxil.dll" (
+  @REM   copy /y "%WindowsSdkVerBinPath%x64\dxil.dll" .
+  @REM )
+  @REM %SZIP% a -mx=9 ..\mesa-d3d12.zip 
+  @REM popd
 
   echo ::set-output name=LLVM_VERSION::%LLVM_VERSION%
   echo ::set-output name=MESA_VERSION::%MESA_VERSION%
