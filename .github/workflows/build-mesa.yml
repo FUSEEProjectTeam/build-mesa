@@ -3,8 +3,9 @@ name: build-mesa
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'build.cmd'
+  workflow_dispatch:
 
 jobs:
   build:
