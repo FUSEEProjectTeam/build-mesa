@@ -2,7 +2,9 @@
 name: build-mesa
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -10,7 +12,7 @@ jobs:
     steps:
 
       - name: checkout
-        uses: actions/checkout@v2          
+        uses: actions/checkout@v3
 
       - name: build
         id: build
@@ -39,26 +41,4 @@ jobs:
           upload_url: ${{ steps.release.outputs.upload_url }}
           asset_path: "mesa-llvmpipe.zip"
           asset_name: "mesa-llvmpipe.zip"
-          asset_content_type: application/zip
-
-      - name: upload osmesa
-        id: upload-osmesa
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.release.outputs.upload_url }}
-          asset_path: "mesa-osmesa.zip"
-          asset_name: "mesa-osmesa.zip"
-          asset_content_type: application/zip
-
-      - name: upload d3d12
-        id: upload-d3d12
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.release.outputs.upload_url }}
-          asset_path: "mesa-d3d12.zip"
-          asset_name: "mesa-d3d12.zip"
           asset_content_type: application/zip
